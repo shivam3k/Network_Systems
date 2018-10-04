@@ -18,12 +18,12 @@
 #include <dirent.h>
 
 #define NSEC_PER_MSEC							(1000000)
-#define BUFSIZE 								(3100)
-#define CMD_BUFSIZE								(64)
+#define BUFSIZE 							(3100)
+#define CMD_BUFSIZE							(64)
 #define FILENAME_BUFSIZE						(64)
-#define DATA_PACKET_RECV_BUFSIZE				((2*1024) + 15)
+#define DATA_PACKET_RECV_BUFSIZE				        ((2*1024) + 15)
 #define DATA_FIELD_LENGTH						(2*1024)
-#define MAX_DATA_PACKET_COUNT_110MB			    (55*1024)
+#define MAX_DATA_PACKET_COUNT_110MB			                (55*1024)
 #define MAX_FILE_SIZE							(110*1024*1024)
 					
 
@@ -87,7 +87,7 @@ char data_pkt_data_buf[DATA_FIELD_LENGTH];
 
 /*----------------- Bool Variables --------------------------*/
 
-bool get_cmd_ack;			// for get command ack from server
+bool get_cmd_ack;		// for get command ack from server
 bool get_cmd_enable;		// for first iteration of get command
 bool put_cmd_enable;		// for first iteration of put command
 bool def_print_enable;		// to print default print command list
