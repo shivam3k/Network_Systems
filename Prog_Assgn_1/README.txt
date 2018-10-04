@@ -41,8 +41,8 @@ SUBMITTED BY : Shivam Khandelwal
 		1. gt <file name> : Get the file specified by user at client from the server if found.
 		2. pt <file name> : Put the file specified by user in server if file exits in client directory.
 		3. dl <file name> : Delete the file specified by user from server directory if found.
-		4. ls			  : Fetch the current list of files in server directory.
-		5. ex			  : Exit the server gracefully.
+		4. ls		  : Fetch the current list of files in server directory.
+		5. ex		  : Exit the server gracefully.
 		
 -------------------------------------------------------------------------------------------------------------
 
@@ -51,19 +51,19 @@ SUBMITTED BY : Shivam Khandelwal
 		To ensure reliable transfer, certain packet types were created with different fields. 
 		These fields are :
 		
-		a. Packet type 		  		- 	Byte 0
+		a. Packet type 		  	- 	Byte 0
 		b. Packet Sequence Number 	- 	Byte 1 - 6
-		c. Data length	(d)			- 	Byte 7 - 12
-		d. Command type				-	Byte 13
-		e. Data						-	Byte 14 - (14 + d)
+		c. Data length	(d)		- 	Byte 7 - 12
+		d. Command type			-	Byte 13
+		e. Data				-	Byte 14 - (14 + d)
 		
 		The different types of packets defined are - 
 		
 		1. Command Packet 			(C) : Send command to server to perform specified file operation
 		2. Data Packet 	  			(D) : Send data to/from server from/to client
-		3. Acknowledgment Packet	(A) : Send acknowledgement in response to data / command packet.
-		4. File Command Packet		(F) : Send file size from/to server to/from client.
-		5. File Size ACK Packet     (K) : Send ACK in response to file size packet.
+		3. Acknowledgment Packet		(A) : Send acknowledgement in response to data / command packet.
+		4. File Command Packet			(F) : Send file size from/to server to/from client.
+		5. File Size ACK Packet     		(K) : Send ACK in response to file size packet.
 
 -------------------------------------------------------------------------------------------------------------		
 
