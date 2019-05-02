@@ -1,6 +1,6 @@
 /* 
  * @file : uftp_server.c
- * @author : Shivam Khandelwal
+ * @authors : Shivam Khandelwal & Samuel Solondz
  * @brief : UDP Server code for reliable transfer
  *
  */
@@ -536,6 +536,7 @@ void open_packet_server(char *pkt_ptr, char *data_ptr){
 	pkt_type = *pkt_ptr;
 	int data_len;
 	int loop_var1,var2;
+	char chat_msg_buff[150];
 	
 	switch(pkt_type){
 		case 'D':
@@ -560,6 +561,15 @@ void open_packet_server(char *pkt_ptr, char *data_ptr){
 				}
 				filefound = check_file(data_ptr,data_len);
 				strcpy(file_name_buffer,data_ptr);
+			}
+			if(*(pkt_ptr + 13) == 'X'){
+				pkt_ptr += 12;
+				data_len = extract_num(pkt_ptr);
+				pkt_ptr += 2;
+				memcpy(chat_msg_buff, pkt_ptr, data_len);
+				chat_msg_buff[data_len] = '\0';
+				printf("\nReceived message: %s", chat_msg_buff);
+				bzero(chat_msg_buff, strlen(chat_msg_buff) + 1);
 			}
 			if(*(pkt_ptr + 13) == 'P'){	
 				pkt_ptr += 7;

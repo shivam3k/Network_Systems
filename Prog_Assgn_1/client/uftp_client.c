@@ -1,6 +1,6 @@
 /* 
  * @file : uftp_client.c
- * @author : Shivam Khandelwal
+ * @authors : Shivam Khandelwal & Samuel Solondz
  * @brief : UDP Client code for reliable transfer
  *
  */
@@ -775,6 +775,7 @@ int main(int argc, char **argv) {
 			printf("pt [file_name] : Put/Send file to server\n");
 			printf("dl [file_name] : Delete file at server\n");
 			printf("ls : List the files in the server\n");
+			printf("ch : Chat with server");
 			printf("ex : Exit server gracefully\n\n\n - ");
 			bzero(cmd_buff, CMD_BUFSIZE);
 			fgets(cmd_buff, CMD_BUFSIZE, stdin);
@@ -867,9 +868,31 @@ int main(int argc, char **argv) {
 			exit_cmd = create_packet('C','E',client_send_buf,0,&exit_char,1);
 		    	n = sendto(sockfd, client_send_buf, exit_cmd, 0, (struct sockaddr *)&serveraddr, serverlen);
 		    	if (n < 0) { error("ERROR in sendto");}
-			else{printf("\nExit message sent to server");}
+				else{printf("\nExit message sent to server");}
 
 			exit_check = false;
+			
+		}
+		else if(strcmp(cmd_detect, "ch") == 0){
+			bzero(cmd_detect,3);
+			char chat_msg_buff[150];
+			def_print_enable = false;
+			serverlen = sizeof(serveraddr);
+			while(1){
+
+				printf("\nEnter your message: ");
+				scanf("%s", chat_msg_buff);
+				if(strcmp("EXIT",chat_msg_buff) == 0){
+					printf("\nExiting chat mode");
+					break;
+				}
+				bzero(client_send_buf,BUFSIZE);
+				exit_cmd = create_packet('C', 'X', client_send_buf, 0, chat_msg_buff, strlen(chat_msg_buff));
+				n = sendto(sockfd, client_send_buf, exit_cmd, 0, (struct sockaddr *)&serveraddr, serverlen);
+				if (n < 0) { error("ERROR in sendto");}
+
+			}
+			def_print_enable = true;
 			
 		}
 		else{
